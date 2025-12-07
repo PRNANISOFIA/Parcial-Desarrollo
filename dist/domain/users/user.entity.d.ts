@@ -1,0 +1,33 @@
+import { AggregateRoot } from '../shared/aggregate-root';
+import { Email } from './value-objects/email.vo';
+import { PasswordHash } from './value-objects/password-hash.vo';
+import { Role } from './value-objects/role.vo';
+import { UserId } from './value-objects/user-id.vo';
+import { UserName } from './value-objects/user-name.vo';
+export declare class User extends AggregateRoot {
+    readonly id: UserId;
+    private _userName;
+    private _email;
+    private _passwordHash;
+    private _role;
+    private _isActive;
+    private _createdAt;
+    private _updatedAt?;
+    private constructor();
+    static create(userName: UserName, email: Email, passwordHash: PasswordHash, role: Role): User;
+    static restore(id: UserId, userName: UserName, email: Email, passwordHash: PasswordHash, role: Role, isActive: boolean, createdAt: Date, updatedAt?: Date | null): User;
+    get userName(): UserName;
+    get email(): Email;
+    get passwordHash(): PasswordHash;
+    get role(): Role;
+    get isActive(): boolean;
+    get createdAt(): Date;
+    get updatedAt(): Date | null | undefined;
+    changePassword(newHash: PasswordHash): void;
+    rename(newUserName: UserName): void;
+    assignRole(newRole: Role): void;
+    deactivate(): void;
+    reactivate(): void;
+    updateEmail(email: Email): void;
+    private touch;
+}
